@@ -3,61 +3,65 @@ Forensic Embedding Space for Deepfake Attribution
 
 ## Project Structure
 
-This project is organized to separate concerns among the 4 team members.
+This project uses a simplified notebook-based approach, organized to separate concerns.
 
 ```
 forensic-bind/
-├── configs/               # Configuration files (YAML, JSON, etc.)
-├── data/                  # Data storage (ignored by git usually)
-│   ├── processed/         # Preprocessed data ready for training
+├── data/                  # Data storage 
+│   ├── processed/         # Preprocessed data ready for analysis
 │   └── raw/               # Original immutable data dump
-├── notebooks/             # Jupyter notebooks for exploration and prototyping
 ├── reports/               # Generated analysis, figures, and final reports
-├── scripts/               # Executable scripts (e.g., run_training.sh)
-├── src/                   # Source code
-│   ├── data/              # [Member 1] Data loading, preprocessing, and pipelines
-│   ├── detection/         # [Member 3] Deepfake detection logic and inference
-│   ├── evaluation/        # [Member 4] Metrics (Accuracy, F1), reporting tools
-│   ├── models/            # [Shared] Model architectures and definitions
-│   ├── training/          # [Member 2] Training loops, experiments, baselines
-│   └── utils/             # [Shared] Common utility functions
-├── tests/                 # Unit tests
+├── src/                   # Jupyter notebooks organized by responsibility
+│   ├── data/              # Data loading and preprocessing notebooks
+│   ├── evaluation/        # Metrics and analysis notebooks
+│   ├── models/            # Trained models
+│   ├── training/          # Training and experiment notebooks
+│   └── utils/             # Utility functions and helpers
 └── README.md
 ```
 
 ## Responsibilities
 
-### 1. Data, Preprocessing, and Pipeline Setup
+### 1. Data and Preprocessing
 **Folder:** `src/data/`
 - **Responsibilities:**
-  - Implementing data loaders (`Dataset` classes).
-  - Data cleaning and augmentation pipelines.
-  - Scripts to convert raw data in `data/raw/` to `data/processed/`.
-  - Ensuring data consistency and integrity.
+  - Data loading and exploration notebooks
+  - Data cleaning and augmentation
+  - Converting raw data in `data/raw/` to `data/processed/`
+  - Ensuring data consistency and integrity
 
-### 2. Training, Experiments, and Baselines
+### 2. Training and Experiments
 **Folder:** `src/training/`
 - **Responsibilities:**
-  - Writing the training loop (trainer classes).
-  - Setting up experiment tracking (e.g., TensorBoard, WandB).
-  - Implementing baseline methods for comparison.
-  - Hyperparameter tuning configurations (stored in `configs/`).
+  - Training notebooks with experiment tracking
+  - Implementing baseline methods for comparison
+  - Hyperparameter tuning and ablation studies
+  - Training models and saving them to `src/models/`
 
-### 3. Actual Deepfake Detection
-**Folder:** `src/detection/`
+### 3. Model Architectures
+**Folder:** `src/models/`
 - **Responsibilities:**
-  - Implementing the core detection logic/inference pipeline.
-  - APIs or scripts that take an image/video and output a prediction.
-  - Integrating the trained models from `src/models/` for production/demo use.
+  - Trained models
 
-### 4. Metrics and Reporting
-**Folder:** `src/evaluation/` & `reports/`
+### 4. Metrics and Evaluation
+**Folder:** `src/evaluation/`
 - **Responsibilities:**
-  - Implementing evaluation metrics (Accuracy, F1, AUC, etc.).
-  - Generating confusion matrices and ROC curves.
-  - Writing scripts to generate reports in `reports/`.
-  - Analyzing model performance and errors.
+  - Evaluation metrics (Accuracy, F1, etc.)
+  - Confusion matrices and ROC curves
+  - Model performance analysis and reporting
+  - Generating reports in `reports/`
+  - Analyzing model performance and errors
 
 ## Usage
 
-To run the project, ensure dependencies are installed and use the scripts in `scripts/` or `src/`.
+1. Set up the virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+2. Launch Jupyter and open notebooks from the `src/` directory:
+   ```bash
+   jupyter notebook
+   ```
